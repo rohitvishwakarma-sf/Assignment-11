@@ -1,5 +1,4 @@
 import { DataTypes, Model } from "sequelize";
-import { Sequelize } from "sequelize";
 import { sequelize } from "../database";
 
 export class Role extends Model {
@@ -17,6 +16,7 @@ Role.init(
     key: {
       type: new DataTypes.STRING(),
       allowNull: false,
+      unique: true,
     },
     description: {
       type: new DataTypes.STRING(),
@@ -31,6 +31,3 @@ Role.init(
     updatedAt: "modifiedon",
   }
 );
-Role.sync().then(() => {
-  console.log("synced customer");
-});

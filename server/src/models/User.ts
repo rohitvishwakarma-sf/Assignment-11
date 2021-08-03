@@ -1,20 +1,5 @@
 import { DataTypes, Model } from "sequelize";
-import { Sequelize } from "sequelize";
 import { sequelize } from "../database";
-import { Customer } from "./Customer";
-
-// export const sequelize = new Sequelize("assignment11", "postgres", "root", {
-//   host: "localhost",
-//   dialect: "postgres",
-//   pool: { max: 8, min: 0, idle: 1000 },
-// })
-//   .authenticate()
-//   .then(() => {
-//     console.log("connected");
-//   })
-//   .catch((err) => {
-//     console.log(err);
-//   });
 
 export class User extends Model {
   public id!: number;
@@ -27,15 +12,13 @@ export class User extends Model {
   public rolekey!: string;
 
   public static addUser(user: {}) {
-    User.sync().then(() => {
-      User.create(user)
-        .then(() => {
-          console.log("created user");
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    });
+    User.create(user)
+      .then(() => {
+        console.log("created user");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
   public static async updateUser(user: any) {
     return await User.update(user, { where: { id: user.id! } });
@@ -48,7 +31,7 @@ export class User extends Model {
 User.init(
   {
     id: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.INTEGER(),
       autoIncrement: true,
       primaryKey: true,
     },
@@ -80,6 +63,10 @@ User.init(
     rolekey: {
       type: new DataTypes.STRING(),
       allowNull: false,
+      references: {
+        model: "roles",
+        key: "key",
+      },
     },
   },
   {
@@ -89,7 +76,3 @@ User.init(
     updatedAt: "modifiedon",
   }
 );
-
-// User.sync({ force: true }).then(() => {
-//   console.log("synced User");
-// });

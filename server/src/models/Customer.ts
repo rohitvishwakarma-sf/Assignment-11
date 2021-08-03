@@ -1,20 +1,5 @@
 import { DataTypes, Model } from "sequelize";
-import { Sequelize } from "sequelize";
 import { sequelize } from "../database";
-import { User } from "./User";
-
-// export const sequelize = new Sequelize("assignment11", "postgres", "root", {
-//   host: "localhost",
-//   dialect: "postgres",
-//   pool: { max: 8, min: 0, idle: 1000 },
-// })
-//   .authenticate()
-//   .then(() => {
-//     console.log("connected");
-//   })
-//   .catch((err) => {
-//     console.log(err);
-//   });
 
 export class Customer extends Model {
   public name!: string;
@@ -48,6 +33,11 @@ Customer.init(
     user_id: {
       type: new DataTypes.INTEGER(),
       allowNull: false,
+      references: {
+        model: "users",
+        key: "id",
+      },
+      onDelete: "CASCADE",
     },
   },
   {
@@ -57,13 +47,3 @@ Customer.init(
     updatedAt: "modifiedon",
   }
 );
-
-// Customer.hasOne(User, {
-//   sourceKey: "user_id",
-//   foreignKey: "id",
-//   as: "user",
-// });
-// Customer.belongsTo(User, { foreignKey: "id" });
-// Customer.sync({ force: true }).then(() => {
-//   console.log("setup hasone");
-// });

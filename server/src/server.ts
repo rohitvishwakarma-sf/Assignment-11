@@ -4,6 +4,7 @@ import { queries } from "./queries";
 import { User } from "./models/User";
 import { sequelize } from "./database";
 import { Customer } from "./models/Customer";
+import { Role } from "./models/Role";
 const port = 5000;
 
 var corsOptions = {
@@ -12,6 +13,7 @@ var corsOptions = {
   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
 const db = sequelize;
+
 const app = express();
 
 app.use(express.json());
