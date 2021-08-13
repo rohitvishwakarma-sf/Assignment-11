@@ -2,7 +2,7 @@
 
 Add sequelize to previous API application and remove postgres connector throughout. Push the code to the repo on github. Generate a PR for review.
 
-## Libraries Used
+## Cocepts and Libraries Used
 
 - Angular for UI
 - bootstrap for styling
@@ -11,6 +11,7 @@ Add sequelize to previous API application and remove postgres connector througho
 - nodemon for server restart
 - CORS to follow CORS policy
 - Sequelize ORM
+- Associations/Relations
 
 ## How to run
 

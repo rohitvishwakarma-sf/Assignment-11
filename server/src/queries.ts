@@ -1,11 +1,14 @@
 import { Request, Response } from "express";
 import { User } from "./models/User";
 import { Customer } from "./models/Customer";
+
+function associations(){
+  User.belongsTo(Customer,{foreignKey:'customerId'});
+}
+associations();
 class Queries {
   async getAllUsers(request: Request, response: Response) {
-    const user = await User.findAll();
-    console.log(user);
-    
+    const user = await User.findAll({include:{model:Customer}});
     response.status(200).json(user);
   }
   async getUserById(id: number) {

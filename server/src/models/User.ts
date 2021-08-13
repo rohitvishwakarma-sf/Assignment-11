@@ -1,5 +1,6 @@
 import { DataTypes, Model } from "sequelize";
 import { sequelize } from "../database";
+import { Customer } from "./Customer";
 
 export class User extends Model {
   public id!: number;
@@ -10,6 +11,7 @@ export class User extends Model {
   public phone!: string;
   public address!: string;
   public rolekey!: string;
+  public customerId!:number;
 
   public static addUser(user: {}) {
     User.create(user)
@@ -68,6 +70,9 @@ User.init(
         key: "key",
       },
     },
+    customerId:{
+      type:new DataTypes.INTEGER()
+    }
   },
   {
     tableName: "users",
@@ -76,3 +81,5 @@ User.init(
     updatedAt: "modifiedon",
   }
 );
+
+
